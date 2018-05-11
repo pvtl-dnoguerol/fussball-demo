@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: alexsuch/angular-cli}
+
+inputs:
+- name: fussball-demo
+outputs:
+- name: build-output2
+
+run:
+  path: fussball-demo/ci/build-www.sh
