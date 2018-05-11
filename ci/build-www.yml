@@ -11,4 +11,4 @@ outputs:
 - name: build-output2
 
 run:
-  path: fussball-demo/ci/build-www.sh
+  path: fussball-demo-www/ci/build-www.sh
