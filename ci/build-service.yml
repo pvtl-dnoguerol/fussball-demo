@@ -7,6 +7,8 @@ image_resource:
 
 inputs:
 - name: fussball-demo
+outputs:
+- name: fussball-demo/fussball-service/build/libs
 
 run:
   path: fussball-demo/ci/build-service.sh
