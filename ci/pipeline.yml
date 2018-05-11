@@ -1,0 +1,14 @@
+---
+resouces:
+- name: fussball-demo
+  type: git
+  source:
+    uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
+    branch: master
+jobs:
+- name: fussball-service-build
+  plan:
+  - get: fussball-demo
+    trigger: true
+  - task: build-service
+    file: fussball-demo/ci/build-service.yml
