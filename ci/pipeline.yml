@@ -1,14 +1,46 @@
 ---
-resources:
-- name: fussball-demo
-  type: git
-  source:
-    uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
-    branch: master
 jobs:
-- name: fussball-service-build
+
+- name: deploy-service
+  public: true
+  serial: true
   plan:
   - get: fussball-demo
     trigger: true
   - task: build-service
     file: fussball-demo/ci/build-service.yml
+  - put: pws
+    params:
+      manifest: fussball-demo/fussball-service/manifest.yml
+
+- name: deploy-www
+  public: true
+  serial: true
+  plan:
+  - get: fussball-demo
+    trigger: true
+  - task: build-www
+    file: fussball-demo/ci/build-www.yml
+    params:
+      GOOGLE_MAPS_API_KEY: ((google-maps-api-key))
+  - put: pws
+    params:
+      manifest: fussball-demo/www/manifest.yml
+
+resources:
+
+- name: fussball-demo
+  type: git
+  source:
+    uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
+    branch: master
+
+- name: pws
+  type: cf
+  source:
+    api: https://api.run.pivotal.io
+    username: ((pws-username))
+    password: ((pws-password))
+    organization: ((pws-org))
+    space: ((pws-space))
+    skip_cert_check: false
