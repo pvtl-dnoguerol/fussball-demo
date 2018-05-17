@@ -16,7 +16,15 @@ export class MatchesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=2018&projection=matchSummary')
+    this.loadData(2018);
+  }
+
+  onChange(year) {
+    this.loadData(year);
+  }
+
+  loadData(year) {
+    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + year + '&projection=matchSummary')
       .subscribe(data => {
         console.log(data);
         this.matches = data['_embedded']['matches'];

@@ -1,4 +1,4 @@
-package com.pivotal.demo.FussballService.repo.projections;
+package com.pivotal.demo.FussballService.model.projections;
 
 import com.pivotal.demo.FussballService.model.Match;
 import org.springframework.beans.factory.annotation.Value;

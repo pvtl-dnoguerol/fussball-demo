@@ -1,6 +1,6 @@
 <div id="controls" class="row">
   <div class="col-lg-12">
-    Jahre: <select><option *ngFor="let year of years">{{year}}</option></select>
+    Jahre: <select #t (change)="onChange(t.value)"><option *ngFor="let year of years">{{year}}</option></select>
   </div>
 </div>
 <div class="row">
