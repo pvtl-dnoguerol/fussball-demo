@@ -1,7 +1,6 @@
 package com.pivotal.demo.FussballService.repo;
 
 import com.pivotal.demo.FussballService.model.Match;
-import com.pivotal.demo.FussballService.repo.projections.MatchSummary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Date;
 
-@RepositoryRestResource(collectionResourceRel="matches",path="matches",excerptProjection=MatchSummary.class)
+@RepositoryRestResource(collectionResourceRel="matches",path="matches")
 public interface MatchRepository extends PagingAndSortingRepository<Match,Long> {
     Page findAll(Pageable p);
     Page findAllByDateBetween(@Param("start") Date start, @Param("end") Date end, Pageable p);
