@@ -1,3 +1,7 @@
 agm-map {
   height: 600px;
 }
+
+#controls {
+  margin-bottom: 15px;
+}

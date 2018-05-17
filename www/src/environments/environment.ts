@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiPrefix: 'http://localhost:8081',
-  mapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY_HERE'
+  apiPrefix: 'http://fussball-service.cfapps.io',
+  mapsApiKey: 'AIzaSyCyhWso7ecRgUoomNxhWl03f6j4KfpZ_TA'
 };
 
 /*

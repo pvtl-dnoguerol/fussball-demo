@@ -1,3 +1,31 @@
-<p>
-  matches works!
-</p>
+<div id="controls" class="row">
+  <div class="col-lg-12">
+    Jahre: <select><option *ngFor="let year of years">{{year}}</option></select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>Datum</th>
+          <th>Heimmannschaft</th>
+          <th>H. Punkte</th>
+          <th>Gastmannschaft</th>
+          <th>G. Punkte</th>
+          <th>Standorte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of matches">
+          <td>{{match.date | date}}</td>
+          <td>{{match.homeTeamId}}</td>
+          <td>{{match.homeScore}}</td>
+          <td>{{match.awayTeamId}}</td>
+          <td>{{match.awayScore}}</td>
+          <td>{{match.location.city}}, {{match.location.country}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
