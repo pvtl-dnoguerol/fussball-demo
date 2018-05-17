@@ -9,21 +9,17 @@
       <thead class="thead-light">
         <tr>
           <th>Datum</th>
-          <th>Heimmannschaft</th>
-          <th>H. Punkte</th>
-          <th>Gastmannschaft</th>
-          <th>G. Punkte</th>
-          <th>Standorte</th>
+          <th>Spiel</th>
+          <th>Entstand</th>
+          <th>Austragungsort</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let match of matches">
           <td>{{match.date | date}}</td>
-          <td>{{match.homeTeamId}}</td>
-          <td>{{match.homeScore}}</td>
-          <td>{{match.awayTeamId}}</td>
-          <td>{{match.awayScore}}</td>
-          <td>{{match.location.city}}, {{match.location.country}}</td>
+          <td>{{match.homeTeamName}} - {{match.awayTeamName}}</td>
+          <td>{{match.homeScore}}:{{match.awayScore}}</td>
+          <td>{{match.locationCity}}, {{match.locationCountry}}</td>
         </tr>
       </tbody>
     </table>
