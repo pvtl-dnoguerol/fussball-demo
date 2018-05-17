@@ -10,3 +10,4 @@ inputs:
 
 run:
   path: fussball-demo/ci/test-service.sh
+  user: root
