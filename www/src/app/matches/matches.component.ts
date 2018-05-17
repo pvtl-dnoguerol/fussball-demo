@@ -12,32 +12,38 @@ export class MatchesComponent implements OnInit {
   matches: any[];
   years: Array<Number>;
   pages: any[];
-  currentPage: Number;
-  currentYear: Number;
+  currentPage: number;
+  currentYear: number;
 
   constructor(private _http: HttpClient, private route: ActivatedRoute) {
     this.years = Array(147).fill(0).map((x,i)=>2018-i);
     this.currentYear = 2018;
     this.currentPage = 1;
-    route.queryParams.subscribe(p => this.loadData(p.page));
+    route.queryParams.subscribe((p: any) => {
+      if (!isNaN(p['page'])) {
+        this.currentPage = parseInt(p['page']);
+        this.loadData();
+      }
+    });
   }
 
   ngOnInit() {
+    this.loadData();
   }
 
-  onChange(year) {
+  onChange(year: number) {
     this.currentYear = year;
     this.currentPage = 1;
-    this.loadData(this.currentPage);
+    this.loadData();
   }
 
-  loadData(page) {
-    this.currentPage = page;
-    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&page=' + (this.currentPage-1) + '&projection=matchSummary')
+  loadData() {
+    const p: number = this.currentPage - 1;
+    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&projection=matchSummary&page=' + p)
       .subscribe(data => {
         this.matches = data['_embedded']['matches'];
-        this.currentPage = data.page.number;
-        this.pages = Array(data.page.totalPages).fill(0).map((x, i) => i+1);
+        this.currentPage = data['page']['number'];
+        this.pages = Array(data['page']['totalPages']).fill(0).map((x, i) => i+1);
       });
   }
 
