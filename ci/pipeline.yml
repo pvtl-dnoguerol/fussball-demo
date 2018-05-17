@@ -1,6 +1,14 @@
 ---
 jobs:
 
+- name: job-test-service
+  public: true
+  plan:
+  - get: fussball-demo
+    trigger: true
+  - task: test-service
+    file: fussball-demo/ci/test-service.yml
+
 - name: deploy-service
   public: true
   serial: true
