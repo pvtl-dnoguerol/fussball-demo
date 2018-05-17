@@ -19,7 +19,7 @@ export class MatchesComponent implements OnInit {
     this.years = Array(147).fill(0).map((x,i)=>2018-i);
     this.currentYear = 2018;
     this.currentPage = 1;
-    route.queryParams.subscribe(p => this.loadData(p.page);
+    route.queryParams.subscribe(p => this.loadData(p.page));
   }
 
   ngOnInit() {
