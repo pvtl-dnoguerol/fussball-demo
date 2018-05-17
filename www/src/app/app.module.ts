@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
+import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { AgmCoreModule } from '@agm/core';
+import { MatchesComponent } from './matches/matches.component';
+import { TeamsComponent } from './teams/teams.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   imports: [
@@ -14,12 +18,13 @@ import { AgmCoreModule } from '@agm/core';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
   	AgmCoreModule.forRoot({
       apiKey: environment.mapsApiKey
     })
   ],
   providers: [],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, MatchesComponent, TeamsComponent, MapComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,38 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">International Soccer Mania!</a>
+  <a class="navbar-brand">EKFG</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Map</a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['map']" routerLinkActive="active">Map</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Matches</a>
+        <a class="nav-link" [routerLink]="['matches']" routerLinkActive="active">Matches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Teams</a>
+        <a class="nav-link" [routerLink]="['teams']" routerLinkActive="active">Teams</a>
       </li>
     </ul>
   </div>
 </nav>
 <div class="container">
-  <div class="row">
-    <div class="col-lg-9">
-      Year: <select><option *ngFor="let year of years">{{year}}</option></select>
-    </div>
-    <div class="col-lg-3">
-      <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;&nbsp;Include friendly games
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <!-- this creates a google map on the page with the given lat/lng from -->
-      <!-- the component as the initial center of the map: -->
-      <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
-        <agm-marker *ngFor="let match of matches" [latitude]="match.location.latitude" [longitude]="match.location.longitude"></agm-marker>
-      </agm-map>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>
