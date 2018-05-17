@@ -8,10 +8,12 @@ public class Match {
     @Id
     private Long id;
     public Date date;
-    @Column(name = "home_team_id")
-    public Long homeTeamId;
-    @Column(name = "away_team_id")
-    public Long awayTeamId;
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="home_team_id")
+    public Team homeTeam;
+    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="away_team_id")
+    public Team awayTeam;
     @Column(name = "home_score")
     public Integer homeScore;
     @Column(name = "away_score")
