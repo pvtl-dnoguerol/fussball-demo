@@ -4,4 +4,3 @@ echo "export const environment = { production: true, apiPrefix: 'http://fussball
 npm install
 ng build --prod
 cp -rf dist/www/* ../../build-output2/
-echo $GOOGLE_MAPS_API_KEY
