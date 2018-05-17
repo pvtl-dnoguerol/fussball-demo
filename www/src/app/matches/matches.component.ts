@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-matches',
@@ -10,24 +11,33 @@ import { environment } from "../../environments/environment";
 export class MatchesComponent implements OnInit {
   matches: any[];
   years: Array<Number>;
+  pages: any[];
+  currentPage: Number;
+  currentYear: Number;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private route: ActivatedRoute) {
     this.years = Array(147).fill(0).map((x,i)=>2018-i);
+    this.currentYear = 2018;
+    this.currentPage = 1;
+    route.queryParams.subscribe(p => this.loadData(p.page);
   }
 
   ngOnInit() {
-    this.loadData(2018);
   }
 
   onChange(year) {
-    this.loadData(year);
+    this.currentYear = year;
+    this.currentPage = 1;
+    this.loadData(this.currentPage);
   }
 
-  loadData(year) {
-    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + year + '&projection=matchSummary')
+  loadData(page) {
+    this.currentPage = page;
+    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&page=' + (this.currentPage-1) + '&projection=matchSummary')
       .subscribe(data => {
-        console.log(data);
         this.matches = data['_embedded']['matches'];
+        this.currentPage = data.page.number;
+        this.pages = Array(data.page.totalPages).fill(0).map((x, i) => i+1);
       });
   }
 

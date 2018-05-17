@@ -23,5 +23,10 @@
         </tr>
       </tbody>
     </table>
+    <nav>
+      <ul class="pagination">
+        <li class="page-item" *ngFor="let p of pages" [ngClass]="{active: (p-1==this.currentPage)}"><a class="page-link" [routerLink]="['.']" [queryParams]="{page: p}">{{p}}</a></li>
+      </ul>
+    </nav>
   </div>
 </div>
