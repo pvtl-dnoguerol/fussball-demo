@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 cd fussball-demo/www
 echo "export const environment = { production: true, apiPrefix: 'http://fussball-service.cfapps.io', mapsApiKey: '$GOOGLE_MAPS_API_KEY' };" > src/environments/environment.prod.ts
 npm install
