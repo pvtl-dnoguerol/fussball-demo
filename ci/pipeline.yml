@@ -14,6 +14,7 @@ jobs:
   serial: true
   plan:
   - get: fussball-demo
+    passed: [job-test-service]
     trigger: true
   - task: build-service
     file: fussball-demo/ci/build-service.yml
@@ -27,6 +28,7 @@ jobs:
   plan:
   - get: fussball-demo
     trigger: true
+    passed: [job-test-service]
   - task: build-www
     file: fussball-demo/ci/build-www.yml
     params:
