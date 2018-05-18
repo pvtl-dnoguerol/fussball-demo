@@ -1,6 +1,7 @@
+<h2>Spielen</h2>
 <div id="controls" class="row">
   <div class="col-lg-12">
-    Jahre: <select #t (change)="onChange(t.value)"><option *ngFor="let year of years">{{year}}</option></select>
+    Jahre: <select #t (change)="setYear(t.value)"><option *ngFor="let year of years">{{year}}</option></select>
   </div>
 </div>
 <div class="row">
@@ -25,7 +26,7 @@
     </table>
     <nav>
       <ul class="pagination">
-        <li class="page-item" *ngFor="let p of pages" [ngClass]="{active: (p-1==this.currentPage)}"><a class="page-link" [routerLink]="['.']" [queryParams]="{page: p}">{{p}}</a></li>
+        <li class="page-item" *ngFor="let page of pages" [ngClass]="{active: (page==currentPage)}"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
       </ul>
     </nav>
   </div>

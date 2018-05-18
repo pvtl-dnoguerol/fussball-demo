@@ -19,30 +19,29 @@ export class MatchesComponent implements OnInit {
     this.years = Array(147).fill(0).map((x,i)=>2018-i);
     this.currentYear = 2018;
     this.currentPage = 1;
-    route.queryParams.subscribe((p: any) => {
-      if (!isNaN(p['page'])) {
-        this.currentPage = parseInt(p['page']);
-        this.loadData();
-      }
-    });
   }
 
   ngOnInit() {
     this.loadData();
   }
 
-  onChange(year: number) {
+  setYear(year: number) {
     this.currentYear = year;
     this.currentPage = 1;
     this.loadData();
   }
 
+  setPage(page: number) {
+    this.currentPage = page;
+    this.loadData();
+  }
+
   loadData() {
-    const p: number = this.currentPage - 1;
-    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&projection=matchSummary&page=' + p)
+    const url = environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&projection=matchSummary&page=' + (this.currentPage - 1);
+    this._http.get(url)
       .subscribe(data => {
         this.matches = data['_embedded']['matches'];
-        this.currentPage = data['page']['number'];
+        this.currentPage = data['page']['number'] + 1;
         this.pages = Array(data['page']['totalPages']).fill(0).map((x, i) => i+1);
       });
   }

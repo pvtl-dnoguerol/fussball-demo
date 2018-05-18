@@ -1,3 +1,4 @@
+<h2>Teams</h2>
 <div class="row">
   <div class="col-lg-12">
     <table class="table table-striped">
@@ -12,5 +13,10 @@
       </tr>
       </tbody>
     </table>
+    <nav>
+      <ul class="pagination">
+        <li class="page-item" *ngFor="let page of pages" [ngClass]="{active: (page==this.currentPage)}"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+      </ul>
+    </nav>
   </div>
 </div>

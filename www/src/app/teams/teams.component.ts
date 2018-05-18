@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-teams',
@@ -9,15 +10,29 @@ import {HttpClient} from '@angular/common/http';
 })
 export class TeamsComponent implements OnInit {
   teams: any[];
+  pages: any[];
+  currentPage: number;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private route: ActivatedRoute) {
+    this.currentPage = 1;
   }
 
   ngOnInit() {
-    this._http.get(environment.apiPrefix + '/teams')
+    this.loadData();
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+    this.loadData();
+  }
+
+  loadData() {
+    const p: number = this.currentPage - 1;
+    this._http.get(environment.apiPrefix + '/teams?page=' + p)
       .subscribe(data => {
-        console.log(data);
         this.teams = data['_embedded']['teams'];
+        this.currentPage = data['page']['number'] + 1;
+        this.pages = Array(data['page']['totalPages']).fill(0).map((x, i) => i+1);
       });
   }
 }
