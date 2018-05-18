@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <table class="table table-striped">
+    <table *ngIf="matches && matches.length > 0" class="table table-striped">
       <thead class="thead-light">
         <tr>
           <th>Datum</th>
@@ -24,6 +24,9 @@
         </tr>
       </tbody>
     </table>
+    <div *ngIf="!matches || matches.length == 0" class="alert alert-primary" role="alert">
+      <strong>Prost Mahlzeit!</strong> Es gibt keine Aufzeichnungen für dieses Jahr.
+    </div>
     <nav>
       <ul class="pagination">
         <li class="page-item" *ngFor="let page of pages" [ngClass]="{active: (page==currentPage)}"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>

@@ -1,10 +1,7 @@
 <h2>Eine Kleine Fußball Geschichte</h2>
 <div id="controls" class="row">
-  <div class="col-lg-8">
-    Jahre: <select><option *ngFor="let year of years">{{year}}</option></select>
-  </div>
-  <div class="col-lg-4">
-    <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;&nbsp;Enthalte freundliche Spiele
+  <div class="col-lg-12">
+    Jahre: <select #t (change)="setYear(t.value)"><option *ngFor="let year of years">{{year}}</option></select>
   </div>
 </div>
 <div class="row">
