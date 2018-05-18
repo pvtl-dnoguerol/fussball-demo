@@ -1,5 +1,5 @@
 applications:
-- name: fussballmania
+- name: ekfg
   memory: 32M
   instances: 1
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack
