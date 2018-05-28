@@ -12,4 +12,4 @@ cf delete fussball-service -f
 echo "Renaming new service"
 cf rename fussball-service-test fussball-service
 echo "Removing redundant new route"
-cf delete-route $CF_ORG -n fussball-service-test -f
+cf delete-route $CF_DOMAIN -n fussball-service-test -f

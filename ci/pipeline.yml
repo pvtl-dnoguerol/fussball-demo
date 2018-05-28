@@ -45,6 +45,23 @@ jobs:
     params:
       manifest: fussball-demo/www/manifest.yml
 
+- name: job-prod-push
+  public: true
+  serial: true
+  plan:
+  - get: fussball-demo
+    passed: [job-smoketest-service]
+    trigger: false
+  - task: prod-push
+    file: fussball-demo/ci/prod-push.yml
+    params:
+      CF_API: https://api.run.pivotal.io
+      CF_DOMAIN: cfapps.io
+      CF_ORG: ((pws-org))
+      CF_SPACE: ((pws-space))
+      CF_USER: ((pws-username))
+      CF_PASSWD: ((pws-password))
+
 resources:
 
 - name: fussball-demo
