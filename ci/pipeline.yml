@@ -1,20 +1,20 @@
 ---
 jobs:
 
-- name: job-test-service
+- name: job-unittest-service
   public: true
   plan:
   - get: fussball-demo
     trigger: true
-  - task: test-service
-    file: fussball-demo/ci/test-service.yml
+  - task: unit-test-service
+    file: fussball-demo/ci/unit-test-service.yml
 
-- name: deploy-service
+- name: job-deploy-service
   public: true
   serial: true
   plan:
   - get: fussball-demo
-    passed: [job-test-service]
+    passed: [job-unittest-service]
     trigger: true
   - task: build-service
     file: fussball-demo/ci/build-service.yml
@@ -22,13 +22,21 @@ jobs:
     params:
       manifest: fussball-demo/fussball-service/manifest.yml
 
-- name: deploy-www
+- name: job-smoketest-service
+  public: true
+  plan:
+  - get: fussball-demo
+    passed: [job-deploy-service]
+    trigger: true
+  - task: smoke-test-service
+    file: fussball-demo/ci/smoke-test-service.yml
+
+- name: job-deploy-www
   public: true
   serial: true
   plan:
   - get: fussball-demo
     trigger: true
-    passed: [job-test-service]
   - task: build-www
     file: fussball-demo/ci/build-www.yml
     params:
