@@ -4,9 +4,9 @@ set -e
 echo "Logging into CF"
 cf login -a $CF_API -o $CF_ORG -s $CF_SPACE -u $CF_USER -p $CF_PASSWD
 echo "Adding new route"
-cf map-route fussball-service-test $CF_ORG -n fussball-service
+cf map-route fussball-service-test $CF_DOMAIN -n fussball-service
 echo "Removing old route"
-cf unmap-route fussball-service $CF_ORG -n fussball-service
+cf unmap-route fussball-service $CF_DOMAIN -n fussball-service
 echo "Deleting old service"
 cf delete fussball-service -f
 echo "Renaming new service"
