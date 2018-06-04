@@ -7,7 +7,12 @@
 <div class="row">
   <div class="col-sm-12">
     <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
-      <agm-marker *ngFor="let match of matches" [latitude]="match.location.latitude" [longitude]="match.location.longitude"></agm-marker>
+      <agm-marker *ngFor="let match of matches" [latitude]="match.locationLat" [longitude]="match.locationLong">
+        <agm-info-window>
+          <div><b>{{match.homeTeamName}} - {{match.awayTeamName}}</b></div>
+          <div>{{match.homeScore}} : {{match.awayScore}}</div>
+        </agm-info-window>
+      </agm-marker>
     </agm-map>
   </div>
 </div>

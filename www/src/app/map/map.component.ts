@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
   }
 
   loadData() {
-    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&size=200')
+    this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?projection=matchSummary&year=' + this.currentYear + '&size=200')
       .subscribe(data => {
         this.matches = data['_embedded']['matches'];
       });

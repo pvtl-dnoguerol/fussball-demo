@@ -17,6 +17,10 @@ public interface MatchSummary {
     String getLocationCity();
     @Value("#{target.location.country}")
     String getLocationCountry();
+    @Value("#{target.location.latitude}")
+    Float getLocationLat();
+    @Value("#{target.location.longitude}")
+    Float getLocationLong();
     Integer getHomeScore();
     Integer getAwayScore();
     Boolean getFriendly();
