@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
+  loading = true;
+  error = false;
   teams: any[];
   pages: any[];
   currentPage: number;
@@ -27,12 +29,18 @@ export class TeamsComponent implements OnInit {
   }
 
   loadData() {
+    this.loading = true;
+    this.error = false;
     const p: number = this.currentPage - 1;
     this._http.get(environment.apiPrefix + '/teams?page=' + p)
       .subscribe(data => {
         this.teams = data['_embedded']['teams'];
         this.currentPage = data['page']['number'] + 1;
         this.pages = Array(data['page']['totalPages']).fill(0).map((x, i) => i+1);
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.error = true;
       });
   }
 }

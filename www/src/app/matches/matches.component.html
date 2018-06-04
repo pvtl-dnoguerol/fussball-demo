@@ -6,31 +6,33 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <table *ngIf="matches && matches.length > 0" class="table table-striped">
-      <thead class="thead-light">
-        <tr>
-          <th>Datum</th>
-          <th>Spiel</th>
-          <th>Entstand</th>
-          <th>Austragungsort</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let match of matches">
-          <td>{{match.date | date}}</td>
-          <td>{{match.homeTeamName}} - {{match.awayTeamName}}</td>
-          <td>{{match.homeScore}} : {{match.awayScore}}</td>
-          <td>{{match.locationCity}}, {{match.locationCountry}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="!matches || matches.length == 0" class="alert alert-primary" role="alert">
-      <strong>Prost Mahlzeit!</strong> Es gibt keine Aufzeichnungen für dieses Jahr.
+    <app-loader *ngIf="loading"></app-loader>
+    <div *ngIf="!loading && !error && matches && matches.length > 0">
+      <table class="table table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>Datum</th>
+            <th>Spiel</th>
+            <th>Entstand</th>
+            <th>Austragungsort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let match of matches">
+            <td>{{match.date | date}}</td>
+            <td>{{match.homeTeamName}} - {{match.awayTeamName}}</td>
+            <td>{{match.homeScore}} : {{match.awayScore}}</td>
+            <td>{{match.locationCity}}, {{match.locationCountry}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination">
+          <li class="page-item" *ngFor="let page of pages" [ngClass]="{active: (page==currentPage)}"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav>
-      <ul class="pagination">
-        <li class="page-item" *ngFor="let page of pages" [ngClass]="{active: (page==currentPage)}"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
-      </ul>
-    </nav>
+    <app-error-alert *ngIf="!loading && !error && matches.length == 0" type="primary" msg="Es gibt keine Aufzeichnungen für dieses Jahr"></app-error-alert>
+    <app-error-alert *ngIf="error" type="danger" msg="Beim Laden der Daten ist ein Fehler aufgetreten."></app-error-alert>
   </div>
 </div>

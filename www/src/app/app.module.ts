@@ -11,6 +11,8 @@ import { AgmCoreModule } from '@agm/core';
 import { MatchesComponent } from './matches/matches.component';
 import { TeamsComponent } from './teams/teams.component';
 import { MapComponent } from './map/map.component';
+import { LoaderComponent } from './loader/loader.component';
+import { ErrorAlertComponent } from './error-alert/error-alert.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,7 @@ import { MapComponent } from './map/map.component';
     })
   ],
   providers: [],
-  declarations: [ AppComponent, MatchesComponent, TeamsComponent, MapComponent ],
+  declarations: [ AppComponent, MatchesComponent, TeamsComponent, MapComponent, LoaderComponent, ErrorAlertComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

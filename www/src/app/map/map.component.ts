@@ -8,8 +8,8 @@ import { environment } from "../../environments/environment";
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-
-  title: string = 'Eine Kleine Fussball Geschikte';
+  loading = true;
+  error = false;
   matches: any[];
   years: Array<Number>;
   currentYear: number;
@@ -29,9 +29,15 @@ export class MapComponent implements OnInit {
   }
 
   loadData() {
+    this.loading = true;
+    this.error = false;
     this._http.get(environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?projection=matchSummary&year=' + this.currentYear + '&size=200')
       .subscribe(data => {
-        this.matches = data['_embedded']['matches'];
+        this.matches = data['_embedded']['matches'] ? data['_embedded']['matches'] : [];
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.error = true;
       });
   }
 }

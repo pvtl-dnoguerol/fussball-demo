@@ -9,6 +9,8 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./matches.component.css']
 })
 export class MatchesComponent implements OnInit {
+  loading = true;
+  error = false;
   matches: any[];
   years: Array<Number>;
   pages: any[];
@@ -37,12 +39,18 @@ export class MatchesComponent implements OnInit {
   }
 
   loadData() {
+    this.loading = true;
+    this.error = false;
     const url = environment.apiPrefix + '/matches/search/findAllByYearOrderByDateDesc?year=' + this.currentYear + '&projection=matchSummary&page=' + (this.currentPage - 1);
     this._http.get(url)
       .subscribe(data => {
-        this.matches = data['_embedded']['matches'];
+        this.matches = data['_embedded']['matches'] ? data['_embedded']['matches'] : [];
         this.currentPage = data['page']['number'] + 1;
         this.pages = Array(data['page']['totalPages']).fill(0).map((x, i) => i+1);
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.error = true;
       });
   }
 

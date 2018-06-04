@@ -6,13 +6,18 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
-      <agm-marker *ngFor="let match of matches" [latitude]="match.locationLat" [longitude]="match.locationLong">
-        <agm-info-window>
-          <div><b>{{match.homeTeamName}} - {{match.awayTeamName}}</b></div>
-          <div>{{match.homeScore}} : {{match.awayScore}}</div>
-        </agm-info-window>
-      </agm-marker>
-    </agm-map>
+    <app-loader *ngIf="loading"></app-loader>
+    <div *ngIf="!loading && !error && matches && matches.length > 0">
+      <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
+        <agm-marker *ngFor="let match of matches" [latitude]="match.locationLat" [longitude]="match.locationLong">
+          <agm-info-window>
+            <div><b>{{match.homeTeamName}} - {{match.awayTeamName}}</b></div>
+            <div>{{match.homeScore}} : {{match.awayScore}}</div>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+    <app-error-alert *ngIf="error" type="danger" msg="Beim Laden der Daten ist ein Fehler aufgetreten"></app-error-alert>
+    <app-error-alert *ngIf="!loading && !error && matches.length == 0" type="primary" msg="Es gibt keine Aufzeichnungen für dieses Jahr"></app-error-alert>
   </div>
 </div>
