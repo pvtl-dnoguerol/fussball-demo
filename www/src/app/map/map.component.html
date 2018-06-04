@@ -11,8 +11,16 @@
       <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
         <agm-marker *ngFor="let match of matches" [latitude]="match.locationLat" [longitude]="match.locationLong">
           <agm-info-window>
-            <div><b>{{match.homeTeamName}} - {{match.awayTeamName}}</b></div>
-            <div>{{match.homeScore}} : {{match.awayScore}}</div>
+              <h6>
+                {{match.locationCity}}, {{match.locationCountry}}<br/>
+                <small class="text-muted">{{match.date | date}}</small>
+              </h6>
+              <div class="text-center">
+                <table class="table table-sm">
+                  <tr><td class="text-secondary">{{match.homeTeamName}}</td><td class="text-secondary">{{match.awayTeamName}}</td></tr>
+                  <tr><td><h4 class="text-primary">{{match.homeScore}}</h4></td><td><h4 class="text-primary">{{match.awayScore}}</h4></td></tr>
+                </table>
+              </div>
           </agm-info-window>
         </agm-marker>
       </agm-map>
