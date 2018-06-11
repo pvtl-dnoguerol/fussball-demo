@@ -54,7 +54,9 @@
               "outputPath": "dist/www-en/",
               "i18nFile": "src/locale/messages.en.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "en"
+              "i18nLocale": "en",
+              "baseHref": "/en/",
+              "deployUrl": "/en/"
             },
             "production-en": {
               "fileReplacements": [
@@ -84,7 +86,9 @@
               "outputPath": "dist/www-de/",
               "i18nFile": "src/locale/messages.de.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "en"
+              "i18nLocale": "en",
+              "baseHref": "/de/",
+              "deployUrl": "/de/"
             },
             "production-de": {
               "fileReplacements": [
@@ -114,7 +118,9 @@
               "outputPath": "dist/www-nl/",
               "i18nFile": "src/locale/messages.nl.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "nl"
+              "i18nLocale": "nl",
+              "baseHref": "/nl/",
+              "deployUrl": "/nl/"
             },
             "production-nl": {
               "fileReplacements": [
