@@ -6,8 +6,8 @@ image_resource:
   source: {repository: nulldriver/cf-cli-resource, tag: "2.6.0"}
 
 inputs:
-- name: fussball-demo
+- name: fussball-demo-service
 
 run:
-  path: fussball-demo/ci/prod-push.sh
+  path: fussball-demo-service/ci/prod-push.sh
   user: root

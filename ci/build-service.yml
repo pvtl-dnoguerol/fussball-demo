@@ -6,9 +6,9 @@ image_resource:
   source: {repository: java, tag: openjdk-8}
 
 inputs:
-- name: fussball-demo
+- name: fussball-demo-service
 outputs:
 - name: build-output
 
 run:
-  path: fussball-demo/ci/build-service.sh
+  path: fussball-demo-service/ci/build-service.sh

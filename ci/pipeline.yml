@@ -4,56 +4,56 @@ jobs:
 - name: job-unittest-service
   public: true
   plan:
-  - get: fussball-demo
+  - get: fussball-demo-service
     trigger: true
   - task: unit-test-service
-    file: fussball-demo/ci/unit-test-service.yml
+    file: fussball-demo-service/ci/unit-test-service.yml
 
 - name: job-deploy-service
   public: true
   serial: true
   plan:
-  - get: fussball-demo
+  - get: fussball-demo-service
     passed: [job-unittest-service]
     trigger: true
   - task: build-service
-    file: fussball-demo/ci/build-service.yml
+    file: fussball-demo-service/ci/build-service.yml
   - put: pws
     params:
-      manifest: fussball-demo/fussball-service/manifest.yml
+      manifest: fussball-demo-service/fussball-service/manifest.yml
 
 - name: job-smoketest-service
   public: true
   plan:
-  - get: fussball-demo
+  - get: fussball-demo-service
     passed: [job-deploy-service]
     trigger: true
   - task: smoke-test-service
-    file: fussball-demo/ci/smoke-test-service.yml
+    file: fussball-demo-service/ci/smoke-test-service.yml
 
 - name: job-deploy-www
   public: true
   serial: true
   plan:
-  - get: fussball-demo
+  - get: fussball-demo-www
     trigger: true
   - task: build-www
-    file: fussball-demo/ci/build-www.yml
+    file: fussball-demo-www/ci/build-www.yml
     params:
       GOOGLE_MAPS_API_KEY: ((google-maps-api-key))
   - put: pws
     params:
-      manifest: fussball-demo/www/manifest.yml
+      manifest: fussball-demo-www/www/manifest.yml
 
 - name: job-prod-push
   public: true
   serial: true
   plan:
-  - get: fussball-demo
+  - get: fussball-demo-service
     passed: [job-smoketest-service]
     trigger: false
   - task: prod-push
-    file: fussball-demo/ci/prod-push.yml
+    file: fussball-demo-service/ci/prod-push.yml
     params:
       CF_API: https://api.run.pivotal.io
       CF_DOMAIN: cfapps.io
@@ -64,11 +64,19 @@ jobs:
 
 resources:
 
-- name: fussball-demo
+- name: fussball-demo-www
   type: git
   source:
     uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
     branch: master
+    paths: www
+
+- name: fussball-demo-service
+  type: git
+  source:
+    uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
+    branch: master
+    paths: fussball-service
 
 - name: pws
   type: cf

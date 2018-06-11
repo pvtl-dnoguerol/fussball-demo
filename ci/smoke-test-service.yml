@@ -6,8 +6,8 @@ image_resource:
   source: {repository: gradle, tag: 4.7-jdk8}
 
 inputs:
-- name: fussball-demo
+- name: fussball-demo-service
 
 run:
-  path: fussball-demo/ci/smoke-test-service.sh
+  path: fussball-demo-service/ci/smoke-test-service.sh
   user: root
