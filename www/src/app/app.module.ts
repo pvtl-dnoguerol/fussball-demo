@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,12 @@ import { MapComponent } from './map/map.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ErrorAlertComponent } from './error-alert/error-alert.component';
 
+import localeDe from '@angular/common/locales/de';
+import localeNl from '@angular/common/locales/nl';
+
+registerLocaleData(localeDe, 'de');
+registerLocaleData(localeNl, 'nl');
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -25,7 +31,8 @@ import { ErrorAlertComponent } from './error-alert/error-alert.component';
       apiKey: environment.mapsApiKey
     })
   ],
-  providers: [],
+  providers: [
+  ],
   declarations: [ AppComponent, MatchesComponent, TeamsComponent, MapComponent, LoaderComponent, ErrorAlertComponent ],
   bootstrap: [ AppComponent ]
 })
