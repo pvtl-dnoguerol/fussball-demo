@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  locale = '/';
+  this.locale = 'de';
 
   constructor() {
     const path: string = location.pathname.toString();
@@ -18,6 +18,10 @@ export class AppComponent {
   }
 
   onLocaleChange(value) {
-    window.location.href = '/' + value + '/';
+    if (value == 'de') {
+      window.location.href = '/';
+    } else {
+      window.location.href = '/' + value + '/';
+    }
   }
 }
