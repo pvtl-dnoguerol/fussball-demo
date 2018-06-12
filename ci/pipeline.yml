@@ -69,14 +69,16 @@ resources:
   source:
     uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
     branch: master
-    paths: www
+    paths:
+      - www
 
 - name: fussball-demo-service
   type: git
   source:
     uri: https://github.com/pvtl-dnoguerol/fussball-demo.git
     branch: master
-    paths: fussball-service
+    paths:
+      - fussball-service
 
 - name: pws
   type: cf
