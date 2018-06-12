@@ -9,7 +9,7 @@ public class MatchIntegTests {
     @Test public void
     matches_resource_returns_200_with_page0_results() {
         when().
-                get("https://fussball-service-test.cfapps.io/matches").
+                get("https://fussball-service-blue.cfapps.io/matches").
         then().
                 statusCode(200).
                 body(
