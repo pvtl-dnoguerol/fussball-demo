@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  this.locale = 'de';
+  locale = 'de';
 
   constructor() {
     const path: string = location.pathname.toString();
