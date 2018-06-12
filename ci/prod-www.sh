@@ -1,6 +1,5 @@
 #!/bin/bash
 export TERM=${TERM:-dumb}
-set -e
 
 echo "Logging into CF"
 cf login -a $CF_API -o $CF_ORG -s $CF_SPACE -u $CF_USER -p $CF_PASSWD
@@ -8,6 +7,7 @@ cf login -a $CF_API -o $CF_ORG -s $CF_SPACE -u $CF_USER -p $CF_PASSWD
 echo "Checking for blue www deployment"
 cf check-route ekfg-blue $CF_DOMAIN | grep 'does exist' &> /dev/null
 if [ $? == 0 ]; then
+	set -e
 	echo "Adding blue route to www"
 	cf map-route ekfg-blue $CF_DOMAIN -n ekfg
 	echo "Removing green www route"

@@ -11,7 +11,8 @@ public class DemoButtonController {
     private static String FLY_BIN = "/usr/local/bin/fly";
     private static String FLY_TEAM = "wings";
     private static String FLY_PIPELINE = "fussball-demo";
-    private static String FLY_JOB = "job-prod-push";
+    private static String FLY_JOB1 = "job-service-prod";
+    private static String FLY_JOB2 = "job-www-prod";
 
     private SerialPort port;
     private boolean foundDevice = false;
@@ -67,12 +68,17 @@ public class DemoButtonController {
     private void onButtonPressed() {
         System.out.println("Button pressed!");
         try {
-            // attempt login
-            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TEAM, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB).inheritIO().start();
+            // trigger service job
+            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TEAM, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB1).inheritIO().start();
             p.waitFor();
-
             if (p.exitValue() != 0) {
-                System.out.println("Unable to start job");
+                System.out.println("Unable to start service prod job");
+            }
+            // trigger www job
+            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TEAM, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB2).inheritIO().start();
+            p.waitFor();
+            if (p.exitValue() != 0) {
+                System.out.println("Unable to start www prod job");
             }
         } catch (Exception e) {
             e.printStackTrace();
