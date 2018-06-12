@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,6 +32,7 @@ registerLocaleData(localeNl, 'nl');
     })
   ],
   providers: [
+    Title
   ],
   declarations: [ AppComponent, MatchesComponent, TeamsComponent, MapComponent, LoaderComponent, ErrorAlertComponent ],
   bootstrap: [ AppComponent ]
