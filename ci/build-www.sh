@@ -4,12 +4,9 @@ echo "export const environment = { production: true, apiPrefix: 'http://fussball
 npm install
 ng build --configuration=production
 ng build --configuration=production-en
-ng build --configuration=production-de
 ng build --configuration=production-nl
 cp -rf dist/www/* ../../build-output2/
 mkdir ../../build-output2/en
 cp -rf dist/www-en/* ../../build-output2/en/
-mkdir ../../build-output2/de
-cp -rf dist/www-de/* ../../build-output2/de/
 mkdir ../../build-output2/nl
 cp -rf dist/www-nl/* ../../build-output2/nl/
