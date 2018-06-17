@@ -9,7 +9,7 @@ import java.util.Properties;
 public class DemoButtonController {
     private static String PORT = "cu.usbmodem14111231";
     private static String FLY_BIN = "/usr/local/bin/fly";
-    private static String FLY_TEAM = "wings";
+    private static String FLY_TARGET = "wings";
     private static String FLY_PIPELINE = "fussball-demo";
     private static String FLY_JOB1 = "job-service-prod";
     private static String FLY_JOB2 = "job-www-prod";
@@ -29,9 +29,10 @@ public class DemoButtonController {
             props.load(new FileReader("button.properties"));
             PORT = props.getProperty("port", PORT);
             FLY_BIN = props.getProperty("flyPath", FLY_BIN);
-            FLY_TEAM = props.getProperty("team", FLY_TEAM);
+            FLY_TARGET = props.getProperty("target", FLY_TARGET);
             FLY_PIPELINE = props.getProperty("pipeline", FLY_PIPELINE);
-            FLY_JOB = props.getProperty("job", FLY_JOB);
+            FLY_JOB1 = props.getProperty("job1", FLY_JOB1);
+            FLY_JOB2 = props.getProperty("job1", FLY_JOB2);
             System.out.println("Loaded configuration file");
         } catch (IOException e) {
             System.out.println("Configuration file not found; using defaults");
@@ -69,13 +70,15 @@ public class DemoButtonController {
         System.out.println("Button pressed!");
         try {
             // trigger service job
-            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TEAM, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB1).inheritIO().start();
+            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TARGET, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB1).inheritIO().start();
+            System.out.println(FLY_BIN + " -t " + FLY_TARGET + " trigger-job -j " + FLY_PIPELINE + "/" + FLY_JOB1);
             p.waitFor();
             if (p.exitValue() != 0) {
                 System.out.println("Unable to start service prod job");
             }
             // trigger www job
-            Process p = new ProcessBuilder(FLY_BIN, "-t", FLY_TEAM, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB2).inheritIO().start();
+            p = new ProcessBuilder(FLY_BIN, "-t", FLY_TARGET, "trigger-job", "-j", FLY_PIPELINE + "/" + FLY_JOB2).inheritIO().start();
+            System.out.println(FLY_BIN + " -t " + FLY_TARGET + " trigger-job -j " + FLY_PIPELINE + "/" + FLY_JOB2);
             p.waitFor();
             if (p.exitValue() != 0) {
                 System.out.println("Unable to start www prod job");

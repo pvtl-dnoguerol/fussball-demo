@@ -8,7 +8,7 @@
   <div class="col-sm-12">
     <app-loader *ngIf="loading"></app-loader>
     <div *ngIf="!loading && !error && matches && matches.length > 0">
-      <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1">
+      <agm-map [latitude]="0" [longitude]="0" [zoom]="2" [minZoom]="1" [mapTypeId]="'satellite'">
         <agm-marker *ngFor="let match of matches" [latitude]="match.locationLat" [longitude]="match.locationLong">
           <agm-info-window>
               <h6>
